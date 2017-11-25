@@ -33,8 +33,9 @@ function ajax(u, f, p){
 var APP = {
 	config: {
 		bg_type: "img", // img | vid
-		img_count: 20,
-		img_url: "/assets/images/bg/bg-{N}.jpg",
+		img_count: 200000,
+		img_url: "https://source.unsplash.com/random?r={N}", //Чисто для себе - рандомна картинка з Unsplash
+		//img_url: "/assets/images/bg/bg-{N}.jpg",
 		vid_url: "/assets/video/stalker.mp4"
 	},
 	i18n: {
