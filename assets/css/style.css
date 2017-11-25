@@ -1,0 +1,352 @@
+##	Code written by David Manzhula (@da411d), 2017
+##	https://da411d.pp.ua/
+
+::selection {
+	background-color: #000000;
+	color: #ffffff;
+}
+.fl_l {float: left;}
+.fl_r {float: right;}
+.o0 {opacity: 0;}
+.o1 {opacity: 1;}
+
+* {
+	transition-duration: 0.3s;
+	transition-property : transform, width, height, box-shadow, text-shadow, border, background, top, left, right, bottom, opacity;
+	outline: none;
+	box-sizing: border-box;
+}
+
+body {
+	background: #ffffff;
+	font-family: 'Lato', 'Lato Light', Arial;
+	letter-spacing: 1px;
+	font-size: 24px;
+	font-weight: 400;
+	color: #ffffff;
+	cursor: default;
+	margin: 0px;
+	overflow-x: hidden;
+}
+
+body.invisible{
+	opacity: 0;
+	pointer-events: none;
+}
+
+#bg{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	
+	background-position: 50% 50%;
+	background-attachment: fixed;
+	background-size: cover;
+	background-repeat: no-repeat;
+	transition-property: background-image;
+	
+	z-index: -100;
+	pointer-events: none;
+}
+#bg:before{
+	content:'';
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 256px;
+	background: linear-gradient(180deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+	z-index:3;
+}
+#bg:after{
+	content:'';
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 256px;
+	background: linear-gradient(0deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+	z-index:3;
+}
+#bg video{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	width: auto;
+	height: auto;
+	min-width: 100%; 
+	min-height: 100%; 
+	z-index:1;
+}
+
+#header{
+	position: fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	padding: 16px;
+	z-index: 100000;
+}
+
+#header nav{
+	text-align: right;
+}
+#header nav > a{
+	display: inline-block;
+	height: 32px;
+	margin: 0 8px;
+	vertical-align: middle;
+	color: #ffffff;
+	text-decoration: none;
+	font-size: 18px;
+	line-height: 32px;
+}
+#header nav > a:hover{
+	text-shadow: 0 0 16px #ffffff, 0 0 16px #ffffff;
+}
+#header nav > a > span{
+	vertical-align: middle;
+}
+#header nav > a > img{
+	height: 24px;
+	vertical-align: middle;
+}
+#header nav a img#userimage{
+	float: right;
+	height: 32px;
+	border-radius: 100%;
+}
+#header #apps{
+	position: fixed;
+	top: 64px;
+	right: 24px;
+	width: 300px;
+	padding: 16px;
+	background: #ffffff;
+	border-radius: 4px;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
+	text-align: center;
+	z-index: 10000000000;
+	
+	transform: translateY(32px);
+	opacity: 0;
+	pointer-events: none;
+}
+#header #apps:target{
+	transform: translateY(0px);
+	opacity: 1;
+	pointer-events: initial;
+}
+#header #apps a{
+	display: inline-block;
+	width: calc(33.3% - 8px);
+	margin-bottom: 4px;
+	padding: 4px;
+	color: #b0b0b0;
+	text-decoration: none;
+	font-size: 14px;
+	border-radius: 4px;
+	border: 1px solid transparent;
+}
+#header #apps a:hover{
+	border: 1px solid #b0b0b0;
+}
+#header #apps a img{
+	width: 64px;
+}
+
+
+#header #bookmarks{
+	position: fixed;
+	top: 64px;
+	left: 24px;
+	width: 300px;
+	max-height: calc(100vh - 96px);
+	padding: 8px;
+	overflow: auto;
+	background: #ffffff;
+	text-align: left;
+	border-radius: 4px;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
+	z-index: 10000000000;
+	
+	transform: translateY(32px);
+	opacity: 0;
+	pointer-events: none;
+}
+#header #bookmarks::-webkit-scrollbar-track{background-color: #e0e0e0;}
+#header #bookmarks::-webkit-scrollbar{width:5px;background-color: #F5F5F5;}
+#header #bookmarks::-webkit-scrollbar-thumb{background-color: #b0b0b0;border: none;}
+
+#header #bookmarks:target{
+	transform: translateY(0px);
+	opacity: 1;
+	pointer-events: initial;
+}
+#header #bookmarks a{
+	display: block;
+	margin-bottom: 8px;
+	color: #808080;
+	text-decoration: none;
+	font-size: 14px;
+	border-radius: 4px;
+}
+#header #bookmarks a:hover{
+	background: #f8f8f8;
+}
+#header #bookmarks a img{
+	height: 24px;
+	margin-right: 8px;
+	vertical-align: middle;
+}
+
+
+#center{
+	position: absolute;
+	top: 128px;
+	width: 100%;
+	text-align: center;
+}
+#center .widget{
+	position: relative;
+	margin-bottom: 16px;
+	text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+#time{
+	display: inline-block;
+	vertical-align: top;
+}
+#hour {
+	font-size: 128px;
+	display: inline-block;
+	font-weight: 300;
+	margin: 0;
+	vertical-align: top;
+}
+#date {
+	position: absolute;
+	top: 8px;
+	right: -80px;
+	text-align: left;
+	font-size: 17px;
+	font-weight: 300;
+}
+
+
+
+
+
+#weather {
+	position: absolute;
+	bottom: 16px;
+	right: 16px;
+	text-align: left;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#weather:after {
+	clear: both;
+	width: 100%;
+	content: "";
+	display: block;
+}
+
+#weather #info {
+	float: left;
+	text-align: left;
+	font-size: 15px;
+}
+
+#weather #info img {
+	vertical-align: top;
+	margin-right: 0;
+	height: auto;
+	margin-top: -3px;
+	margin-bottom: 3px;
+}
+
+#weather h1 {
+	float: left;
+	font-size: 50px;
+	font-weight: 300;
+	vertical-align: top;
+	margin-right: 5px;
+	margin-top: 0;
+	margin-bottom: 8px;
+	line-height: 40px;
+}
+
+#weather h1 #units {
+	font-size: 30px;
+}
+
+#weather h1 em {
+	font-style: normal;
+	font-size: 35px;
+	vertical-align: top;
+	display: inline-block;
+	margin-top: -3px;
+}
+/*
+#weather{
+	width: 35px;
+	height: 35px;
+	display: inline-block;
+	vertical-align: top;
+}
+*/
+#weather img {
+	height: 25px;
+	margin-right: 6px;
+}
+
+
+#city_name {
+	width: 200px;
+	height: 30px;
+	padding: 5px;
+	cursor: text;
+}
+
+
+#search input{
+	width: 500px;
+	padding: 8px 16px 8px 48px;
+	font-size: 24px;
+	border: none;
+	border-radius: 100px;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
+	background-color: rgba(255, 255, 255, 0.8);
+	background-image: url(/assets/images/icon/google.png);
+	background-size: 32px 32px;
+	background-repeat: no-repeat;
+	background-position: 8px 6px;
+}
+
+#links{
+	width: 640px;
+	max-width: 100%;
+	margin: auto;
+	font-size: 0px;
+}
+#links a{
+	display: inline-block;
+	width: 64px;
+	height: 64px;
+	margin: 8px;
+	border-radius: 4px;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
+	
+	background-color: rgba(255, 255, 255, 0.8);
+	background-position: 50% 50%;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+#links a:hover{
+	box-shadow: 0px 0px 16px rgba(255, 255, 255, 0.7);
+}
