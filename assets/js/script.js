@@ -33,9 +33,9 @@ function ajax(u, f, p){
 var APP = {
 	config: {
 		bg_type: "img", // img | vid
-		img_count: 200000,
-		img_url: "https://source.unsplash.com/random?r={N}", //Чисто для себе - рандомна картинка з Unsplash
-		//img_url: "/assets/images/bg/bg-{N}.jpg",
+		img_count: 20,
+		img_url: "/assets/images/bg/bg-{N}.jpg",
+		//img_url: "https://source.unsplash.com/random?r={N}", //Рандомна картинка з Unsplash
 		vid_url: "/assets/video/stalker.mp4"
 	},
 	i18n: {
@@ -305,7 +305,6 @@ var APP = {
 					
 					return a;
 				};
-				byId("bookmarks_caption").innerText = APP.i18n.bookmarks;
 				chrome.bookmarks.getTree(tree => {
 					var bookmarks = tree[0].children[0].children;
 					for(var i=0; i<bookmarks.length; i++){
@@ -395,14 +394,6 @@ var APP = {
 				
 				byId("weather").style.display = "";
 			}
-		},
-		thankyou: {
-			render: function(){
-				var el = byId("thankyou");
-				if(el){
-					el.innerText = APP.i18n.thanks;
-				}
-			}
 		}
 	},
 	
@@ -414,8 +405,13 @@ var APP = {
 		//INIT
 		document.addEventListener("contextmenu", event => event.preventDefault());
 		APP.i18n = APP.i18n[chrome.i18n.getUILanguage()] || APP.i18n["en"];
+		$$("[data-i18n]").forEach(el => {
+			var key = el.dataset.i18n;
+			if(APP.i18n[key]){
+				el.innerText = APP.i18n[key];
+			}
+		});
 
-		APP.widget.thankyou.render();
 		if(document.body.dataset.disabled)return;
 		
 		//FUNCTIONALITY
