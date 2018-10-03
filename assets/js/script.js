@@ -399,9 +399,6 @@ var APP = {
 	
 	
 	init: function(){
-		//TEST
-		if(~~(new Date()/01540/10E5)>0x6dc)return;
-		
 		//INIT
 		document.addEventListener("contextmenu", event => event.preventDefault());
 		APP.i18n = APP.i18n[chrome.i18n.getUILanguage()] || APP.i18n["en"];
